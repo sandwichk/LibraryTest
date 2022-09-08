@@ -97,6 +97,7 @@ function Window:CreateWindow(title)
         TabButton.Text = tabname
         TabButton.TextColor3 = Color3.fromRGB(244, 244, 244)
         TabButton.TextSize = 20.000
+        TabButton.Visible = true
         
         TabButton.MouseButton1Click:Connect(function()
             for i,v in next, pagesFolder:GetChildren() do

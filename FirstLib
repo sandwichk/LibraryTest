@@ -101,7 +101,9 @@ function Window:CreateWindow(title)
         
         TabButton.MouseButton1Click:Connect(function()
             for i,v in next, Sections:GetChildren() do
-                v.Visible = false
+                if v:IsA('ScrollingFrame') then
+                    v.Visible = false
+                end
             end 
             NewPage.Visible = true
 

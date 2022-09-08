@@ -1,7 +1,7 @@
 local Window = {}
  
 function Window:CreateWindow(title)
-    
+    title = title or 'Fyuk Lib... No Title'
     local UIGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local SideBar = Instance.new("Frame")
@@ -14,8 +14,12 @@ function Window:CreateWindow(title)
     local ElementsOrganization = Instance.new("UIListLayout")
     local Title = Instance.new("TextLabel")
     
-    UIGui.Name = title
-    UIGui.Parent = game.CoreGui  
+    if game.CoreGui:FindFirstChild("Fyuk Lib") then
+        game:CoreGui:FindFirstChild("Fyuk Lib"):Destroy()
+    end
+
+    UIGui.Name = 'Fyuk Lib'
+    UIGui.Parent = game.CoreGui
     UIGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     UIGui.ResetOnSpawn = false
 
@@ -128,7 +132,8 @@ function Window:CreateWindow(title)
         NewPage.Active = true
         NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         NewPage.BackgroundTransparency = 1.000
-        NewPage.Size = UDim2.new(0, 420,0, 300)
+        NewPage.Size = UDim2.new(0, 420,0, 294)
+        NewPage.Position = UDim2.new(0, 0,0.02, 0)
         NewPage.Visible = false
         NewPage.ScrollBarThickness = 5
  
@@ -136,6 +141,34 @@ function Window:CreateWindow(title)
         ElementsOrganization.Parent = NewPage
         ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
         ElementsOrganization.Padding = UDim.new(0, 3)
+
+        local Buttons = {}
+        
+        function Buttons:CreateButton(btnText, callback)
+            btnText = btnText or "Text Button"
+            callback = callback or function() end   
+            
+            local Button = Instance.new("TextButton")
+            local buttonCorner = Instance.new("UICorner")
+            
+            Button.Name = "Button"
+            Button.Parent = NewPage
+            Button.BackgroundColor3 = Color3.fromRGB(17, 18, 20)
+            Button.Position = UDim2.new(0.0238095243, 0, 0.126666665, 0)
+            Button.Size = UDim2.new(0, 350, 0, 35)
+            Button.Font = Enum.Font.Arial
+            Button.Text = "TextButton"
+            Button.TextColor3 = Color3.fromRGB(223, 223, 223)
+            Button.TextSize = 16.000
+            TextButton.MouseButton1Click:Connect(function()
+                callback()
+            end)
+ 
+            buttonCorner.CornerRadius = UDim.new(0, 5)
+            buttonCorner.Parent = Button
+        end
+        
+        return Buttons
         
     end
     

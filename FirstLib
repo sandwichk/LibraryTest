@@ -15,7 +15,7 @@ function Window:CreateWindow(title)
     local Title = Instance.new("TextLabel")
     
     if game.CoreGui:FindFirstChild("Fyuk Lib") then
-        game:CoreGui:FindFirstChild("Fyuk Lib"):Destroy()
+        game.CoreGui:FindFirstChild("Fyuk Lib"):Destroy()
     end
 
     UIGui.Name = 'Fyuk Lib'

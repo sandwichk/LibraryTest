@@ -2,7 +2,7 @@ local Window = {}
  
 function Window:CreateWindow(title)
     
-    local ScreenGui = Instance.new("ScreenGui")
+    local UIGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local SideBar = Instance.new("Frame")
     local SideBarCorner = Instance.new("UICorner")
@@ -13,7 +13,12 @@ function Window:CreateWindow(title)
     local SectionCorner = Instance.new("UICorner")
     local ElementsOrganization = Instance.new("UIListLayout")
     local Title = Instance.new("TextLabel")
- 
+    
+    UIGui.Name = title
+    UIGui.Parent = game.CoreGui  
+    UIGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    UIGui.ResetOnSpawn = false
+
     Main.Name = "Main"
     Main.Parent = ScreenGui
     Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)

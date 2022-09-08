@@ -1,6 +1,6 @@
-local Window = {}
+local Library = {}
  
-function Window:CreateWindow(title)
+function Library:CreateWindow(title)
     
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
@@ -76,9 +76,9 @@ function Window:CreateWindow(title)
     pagesFolder.Name = "pagesFolder"
     pagesFolder.Parent = Tabs
     
-    local Tabs = {}
+    local Window = {}
     
-    function Tabs:CreateTab(tabname)
+    function Window:CreateTab(tabname)
         tabname = tabname or "New Tab"
         local TabButton = Instance.new("TextButton")
         local TabCorner = Instance.new("UICorner")
@@ -90,7 +90,7 @@ function Window:CreateWindow(title)
         TabButton.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
         TabButton.Size = UDim2.new(0, 138, 0, 25)
         TabButton.Font = Enum.Font.Arial
-        TabButton.Text = "NewTab"
+        TabButton.Text = tabname
         TabButton.TextColor3 = Color3.fromRGB(244, 244, 244)
         TabButton.TextSize = 20.000
         
@@ -130,7 +130,7 @@ function Window:CreateWindow(title)
         
     end
     
-    return Tabs
+    return Window
 end
  
-return Window
+return Library

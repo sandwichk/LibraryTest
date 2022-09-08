@@ -141,7 +141,7 @@ function Window:CreateWindow(title)
         ElementsOrganization.Parent = NewPage
         ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
         ElementsOrganization.Padding = UDim.new(0, 6)
-        ElementsOrganization.HorizontalAlignment
+        ElementsOrganization.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
         local Buttons = {}
         

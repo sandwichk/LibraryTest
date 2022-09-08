@@ -1,6 +1,6 @@
-local Library = {}
+local Window = {}
  
-function Library:CreateWindow(title)
+function Window:CreateWindow(title)
     
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
@@ -34,8 +34,7 @@ function Library:CreateWindow(title)
     Title.TextSize = 24.000
     Title.TextWrapped = true
     Title.TextXAlignment = Enum.TextXAlignment.Left
-    Title.Text = title
-
+    Title.Text = tostring(title)
 
     SideBar.Name = "SideBar"
     SideBar.Parent = Main
@@ -76,9 +75,9 @@ function Library:CreateWindow(title)
     pagesFolder.Name = "pagesFolder"
     pagesFolder.Parent = Tabs
     
-    local Window = {}
+    local TabsTable = {}
     
-    function Window:CreateTab(tabname)
+    function TabsTable:CreateTab(tabname)
         tabname = tabname or "New Tab"
         local TabButton = Instance.new("TextButton")
         local TabCorner = Instance.new("UICorner")
@@ -98,9 +97,9 @@ function Library:CreateWindow(title)
             for i,v in next, pagesFolder:GetChildren() do
                 v.Visible = false
             end 
-            newPage.Visible = true
+            NewPage.Visible = true
             
-            for i,v in next, Tabs:GetChildren() do
+            for i,v in next, TabsTable:GetChildren() do
                 if v:IsA("TextButton") then
                     game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(255, 106, 0)
@@ -130,7 +129,7 @@ function Library:CreateWindow(title)
         
     end
     
-    return Window
+    return TabsTable
 end
  
-return Library
+return Window

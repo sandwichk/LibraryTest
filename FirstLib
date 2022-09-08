@@ -129,6 +129,7 @@ function Window:CreateWindow(title)
         NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         NewPage.BackgroundTransparency = 1.000
         NewPage.Size = UDim2.new(0, 420,0, 300)
+        NewPage.Visible = false
         NewPage.ScrollBarThickness = 5
  
         ElementsOrganization.Name = "ElementsOrganization"

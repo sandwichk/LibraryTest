@@ -5,7 +5,7 @@ function Window:CreateWindow(title)
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local SideBar = Instance.new("Frame")
-    local UICorner = Instance.new("UICorner")
+    local SideBarCorner = Instance.new("UICorner")
     local Tabs = Instance.new("Frame")
     local TabsOrganization = Instance.new("UIListLayout")
     local MainCorner = Instance.new("UICorner")
@@ -43,8 +43,8 @@ function Window:CreateWindow(title)
     SideBar.Position = UDim2.new(0.0166666675, 0, 0.114285715, 0)
     SideBar.Size = UDim2.new(0, 150, 0, 300)
 
-    UICorner.CornerRadius = UDim.new(0, 5)
-    UICorner.Parent = SideBar
+    SideBarCorner.CornerRadius = UDim.new(0, 5)
+    SideBarCorner.Parent = SideBar
 
     Tabs.Name = "Tabs"
     Tabs.Parent = SideBar
@@ -64,8 +64,8 @@ function Window:CreateWindow(title)
     Sections.Position = UDim2.new(0.283333331, 0, 0.114285715, 0)
     Sections.Size = UDim2.new(0, 420, 0, 300)
     
-    UICorner_5.CornerRadius = UDim.new(0, 5)
-    UICorner_5.Parent = Sections
+    SectionCorner.CornerRadius = UDim.new(0, 5)
+    SectionCorner.Parent = Sections
  
     ElementsOrganization.Name = "ElementsOrganization"
     ElementsOrganization.Parent = NewPage

@@ -140,7 +140,8 @@ function Window:CreateWindow(title)
         ElementsOrganization.Name = "ElementsOrganization"
         ElementsOrganization.Parent = NewPage
         ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
-        ElementsOrganization.Padding = UDim.new(0, 3)
+        ElementsOrganization.Padding = UDim.new(0, 6)
+        ElementsOrganization.HorizontalAlignment
 
         local Buttons = {}
         
@@ -160,7 +161,7 @@ function Window:CreateWindow(title)
             Button.Text = "TextButton"
             Button.TextColor3 = Color3.fromRGB(223, 223, 223)
             Button.TextSize = 16.000
-            TextButton.MouseButton1Click:Connect(function()
+            Button.MouseButton1Click:Connect(function()
                 callback()
             end)
  

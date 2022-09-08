@@ -1,0 +1,140 @@
+local Window = {}
+ 
+function Window:CreateWindow(title)
+    
+    local UIGui = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local SideBar = Instance.new("Frame")
+    local SideBarCorner = Instance.new("UICorner")
+    local Tabs = Instance.new("Frame")
+    local TabsOrganization = Instance.new("UIListLayout")
+    local MainCorner = Instance.new("UICorner")
+    local Sections = Instance.new("Frame")
+    local SectionCorner = Instance.new("UICorner")
+    local ElementsOrganization = Instance.new("UIListLayout")
+    local Title = Instance.new("TextLabel")
+    
+    UIGui.Name = title
+    UIGui.Parent = game.CoreGui  
+    UIGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    UIGui.ResetOnSpawn = false
+
+    Main.Name = "Main"
+    Main.Parent = UIGui
+    Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)
+    Main.Position = UDim2.new(0.616145849, 0, 0.43574053, 0)
+    Main.Size = UDim2.new(0, 600, 0, 350)
+    Main.Active = true
+    Main.Draggable = true
+    Main.Visible = true
+
+    MainCorner.CornerRadius = UDim.new(0, 5)
+    MainCorner.Parent = Main
+
+    Title.Name = "Title"
+    Title.Parent = Main
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0.0266666673, 0, 0, 0)
+    Title.Size = UDim2.new(0, 584, 0, 40)
+    Title.Font = Enum.Font.ArialBold
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.TextSize = 24.000
+    Title.TextWrapped = true
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Text = tostring(title)
+    Title.Visible = true
+
+    SideBar.Name = "SideBar"
+    SideBar.Parent = Main
+    SideBar.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+    SideBar.Position = UDim2.new(0.0166666675, 0, 0.114285715, 0)
+    SideBar.Size = UDim2.new(0, 150, 0, 300)
+    SideBar.Visible = true
+
+    SideBarCorner.CornerRadius = UDim.new(0, 5)
+    SideBarCorner.Parent = SideBar
+
+    Tabs.Name = "Tabs"
+    Tabs.Parent = SideBar
+    Tabs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Tabs.BackgroundTransparency = 1.000
+    Tabs.Position = UDim2.new(0.0399999991, 0, 0.0199999996, 0)
+    Tabs.Size = UDim2.new(0, 138, 0, 288)
+    Tabs.Visible = true
+ 
+    TabsOrganization.Name = "TabsOrganization"
+    TabsOrganization.Parent = Tabs
+    TabsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
+    TabsOrganization.Padding = UDim.new(0, 4)
+ 
+    Sections.Name = "Sections"
+    Sections.Parent = Main
+    Sections.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+    Sections.Position = UDim2.new(0.283333331, 0, 0.114285715, 0)
+    Sections.Size = UDim2.new(0, 420, 0, 300)
+    Sections.Visible = true
+    
+    SectionCorner.CornerRadius = UDim.new(0, 5)
+    SectionCorner.Parent = Sections
+
+    
+    local TabsTable = {}
+    
+    function TabsTable:CreateTab(tabname)
+        tabname = tabname or "New Tab"
+        local TabButton = Instance.new("TextButton")
+        local TabCorner = Instance.new("UICorner")
+        local NewPage = Instance.new("ScrollingFrame") 
+        local ElementsOrganization = Instance.new("UIListLayout") 
+        
+        TabButton.Name = "TabButton"
+        TabButton.Parent = Tabs
+        TabButton.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+        TabButton.Size = UDim2.new(0, 138, 0, 25)
+        TabButton.Font = Enum.Font.Arial
+        TabButton.Text = tabname
+        TabButton.TextColor3 = Color3.fromRGB(244, 244, 244)
+        TabButton.TextSize = 20.000
+        TabButton.Visible = true
+        
+        TabButton.MouseButton1Click:Connect(function()
+            for i,v in next, Tabs:GetChildren() do
+                v.Visible = false
+            end 
+            NewPage.Visible = true
+
+            for i,v in next, Tabs:GetChildren() do
+                if v:IsA("TextButton") then
+                    game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+                    }):Play()
+                end
+            end
+            game.TweenService:Create(TabButton, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+            }):Play()
+        end)
+ 
+        TabCorner.CornerRadius = UDim.new(0, 4)
+        TabCorner.Parent = TabButton
+        
+        NewPage.Name = "NewPage"
+        NewPage.Parent = Tabs
+        NewPage.Active = true
+        NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NewPage.BackgroundTransparency = 1.000
+        NewPage.Size = UDim2.new(0, 420,0, 300)
+        NewPage.ScrollBarThickness = 5
+ 
+        ElementsOrganization.Name = "ElementsOrganization"
+        ElementsOrganization.Parent = NewPage
+        ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
+        ElementsOrganization.Padding = UDim.new(0, 3)
+        
+    end
+    
+    return TabsTable
+end
+ 
+return Window

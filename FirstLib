@@ -19,6 +19,7 @@ function Window:CreateWindow(title)
     Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)
     Main.Position = UDim2.new(0.616145849, 0, 0.43574053, 0)
     Main.Size = UDim2.new(0, 600, 0, 350)
+    Main.Visible = true
 
     MainCorner.CornerRadius = UDim.new(0, 5)
     MainCorner.Parent = Main
@@ -35,12 +36,14 @@ function Window:CreateWindow(title)
     Title.TextWrapped = true
     Title.TextXAlignment = Enum.TextXAlignment.Left
     Title.Text = tostring(title)
+    Title.Visible = true
 
     SideBar.Name = "SideBar"
     SideBar.Parent = Main
     SideBar.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
     SideBar.Position = UDim2.new(0.0166666675, 0, 0.114285715, 0)
     SideBar.Size = UDim2.new(0, 150, 0, 300)
+    SideBar.Visible = true
 
     SideBarCorner.CornerRadius = UDim.new(0, 5)
     SideBarCorner.Parent = SideBar
@@ -51,6 +54,7 @@ function Window:CreateWindow(title)
     Tabs.BackgroundTransparency = 1.000
     Tabs.Position = UDim2.new(0.0399999991, 0, 0.0199999996, 0)
     Tabs.Size = UDim2.new(0, 138, 0, 288)
+    Tabs.Visible = true
  
     TabsOrganization.Name = "TabsOrganization"
     TabsOrganization.Parent = Tabs
@@ -62,6 +66,7 @@ function Window:CreateWindow(title)
     Sections.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
     Sections.Position = UDim2.new(0.283333331, 0, 0.114285715, 0)
     Sections.Size = UDim2.new(0, 420, 0, 300)
+    Sections.Visible = true
     
     SectionCorner.CornerRadius = UDim.new(0, 5)
     SectionCorner.Parent = Sections

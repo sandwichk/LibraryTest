@@ -82,6 +82,7 @@ function Window:CreateWindow(title)
     local TabsTable = {}
     
     function TabsTable:CreateTab(tabname)
+
         tabname = tabname or "New Tab"
         local TabButton = Instance.new("TextButton")
         local TabCorner = Instance.new("UICorner")
@@ -95,11 +96,11 @@ function Window:CreateWindow(title)
         TabButton.Font = Enum.Font.Arial
         TabButton.Text = tabname
         TabButton.TextColor3 = Color3.fromRGB(244, 244, 244)
-        TabButton.TextSize = 20.000
+        TabButton.TextSize = 18.000
         TabButton.Visible = true
         
         TabButton.MouseButton1Click:Connect(function()
-            for i,v in next, Tabs:GetChildren() do
+            for i,v in next, Sections:GetChildren() do
                 v.Visible = false
             end 
             NewPage.Visible = true
@@ -107,12 +108,13 @@ function Window:CreateWindow(title)
             for i,v in next, Tabs:GetChildren() do
                 if v:IsA("TextButton") then
                     game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+                        BackgroundColor3 = Color3.fromRGB(20, 22, 25)
                     }):Play()
                 end
             end
+
             game.TweenService:Create(TabButton, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+                BackgroundColor3 = Color3.fromRGB(255, 106, 0)
             }):Play()
         end)
  

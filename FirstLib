@@ -107,12 +107,12 @@ function Window:CreateWindow(title)
             for i,v in next, Tabs:GetChildren() do
                 if v:IsA("TextButton") then
                     game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+                        BackgroundColor3 = Color3.fromRGB(255, 106, 0)
                     }):Play()
                 end
             end
             game.TweenService:Create(TabButton, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+                BackgroundColor3 = Color3.fromRGB(20, 22, 25)
             }):Play()
         end)
  
@@ -120,7 +120,7 @@ function Window:CreateWindow(title)
         TabCorner.Parent = TabButton
         
         NewPage.Name = "NewPage"
-        NewPage.Parent = Tabs
+        NewPage.Parent = Sections
         NewPage.Active = true
         NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         NewPage.BackgroundTransparency = 1.000

@@ -20,7 +20,7 @@ function Window:CreateWindow(title)
     UIGui.ResetOnSpawn = false
 
     Main.Name = "Main"
-    Main.Parent = ScreenGui
+    Main.Parent = UIGui
     Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)
     Main.Position = UDim2.new(0.616145849, 0, 0.43574053, 0)
     Main.Size = UDim2.new(0, 600, 0, 350)

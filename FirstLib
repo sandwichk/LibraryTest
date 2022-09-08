@@ -24,6 +24,8 @@ function Window:CreateWindow(title)
     Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)
     Main.Position = UDim2.new(0.616145849, 0, 0.43574053, 0)
     Main.Size = UDim2.new(0, 600, 0, 350)
+    Main.Active = true
+    Main.Draggable = true
     Main.Visible = true
 
     MainCorner.CornerRadius = UDim.new(0, 5)
@@ -95,7 +97,7 @@ function Window:CreateWindow(title)
         local ElementsOrganization = Instance.new("UIListLayout") 
         
         TabButton.Name = "TabButton"
-        TabButton.Parent = Tabs
+        TabButton.Parent = TabsTable
         TabButton.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
         TabButton.Size = UDim2.new(0, 138, 0, 25)
         TabButton.Font = Enum.Font.Arial

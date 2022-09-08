@@ -81,11 +81,6 @@ function Window:CreateWindow(title)
     ElementsOrganization.Name = "ElementsOrganization"
     ElementsOrganization.Parent = NewPage
     ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
- 
-    local pagesFolder = Instance.new("Folder")
- 
-    pagesFolder.Name = "pagesFolder"
-    pagesFolder.Parent = Tabs
     
     local TabsTable = {}
     
@@ -98,7 +93,7 @@ function Window:CreateWindow(title)
         
         TabButton.Name = "TabButton"
         TabButton.Parent = Tabs
-        TabButton.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+        TabButton.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
         TabButton.Size = UDim2.new(0, 138, 0, 25)
         TabButton.Font = Enum.Font.Arial
         TabButton.Text = tabname
@@ -111,16 +106,16 @@ function Window:CreateWindow(title)
                 v.Visible = false
             end 
             NewPage.Visible = true
-            
+
             for i,v in next, Tabs:GetChildren() do
                 if v:IsA("TextButton") then
                     game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+                        BackgroundColor3 = Color3.fromRGB(20, 22, 25)
                     }):Play()
                 end
             end
             game.TweenService:Create(TabButton, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+                BackgroundColor3 = Color3.fromRGB(255, 106, 0)
             }):Play()
         end)
  
@@ -128,7 +123,7 @@ function Window:CreateWindow(title)
         TabCorner.Parent = TabButton
         
         NewPage.Name = "NewPage"
-        NewPage.Parent = pagesFolder
+        NewPage.Parent = Tabs
         NewPage.Active = true
         NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         NewPage.BackgroundTransparency = 1.000

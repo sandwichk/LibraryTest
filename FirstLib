@@ -97,7 +97,7 @@ function Window:CreateWindow(title)
         local ElementsOrganization = Instance.new("UIListLayout") 
         
         TabButton.Name = "TabButton"
-        TabButton.Parent = TabsTable
+        TabButton.Parent = Tabs
         TabButton.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
         TabButton.Size = UDim2.new(0, 138, 0, 25)
         TabButton.Font = Enum.Font.Arial
@@ -112,7 +112,7 @@ function Window:CreateWindow(title)
             end 
             NewPage.Visible = true
             
-            for i,v in next, TabsTable:GetChildren() do
+            for i,v in next, Tabs:GetChildren() do
                 if v:IsA("TextButton") then
                     game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(255, 106, 0)

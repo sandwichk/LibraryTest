@@ -77,10 +77,7 @@ function Window:CreateWindow(title)
     
     SectionCorner.CornerRadius = UDim.new(0, 5)
     SectionCorner.Parent = Sections
- 
-    ElementsOrganization.Name = "ElementsOrganization"
-    ElementsOrganization.Parent = NewPage
-    ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
+
     
     local TabsTable = {}
     
@@ -102,7 +99,7 @@ function Window:CreateWindow(title)
         TabButton.Visible = true
         
         TabButton.MouseButton1Click:Connect(function()
-            for i,v in next, pagesFolder:GetChildren() do
+            for i,v in next, Tabs:GetChildren() do
                 v.Visible = false
             end 
             NewPage.Visible = true

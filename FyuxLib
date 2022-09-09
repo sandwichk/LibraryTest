@@ -360,7 +360,6 @@ function Window:CreateWindow(title, pos)
                 
                 
                 local function updateColour(centreOfWheel)
-                    if colourWheel:FindFirstChild('Picker') then
                         local colourPickerCentre = Vector2.new(
                             colourWheel.Picker.AbsolutePosition.X + (colourWheel.Picker.AbsoluteSize.X/2),
                             colourWheel.Picker.AbsolutePosition.Y + (colourWheel.Picker.AbsoluteSize.Y/2)
@@ -404,7 +403,6 @@ function Window:CreateWindow(title, pos)
                                 )	
                             end
                                 updateColour(centreOfWheel)
-                    end
                     end)
 	
 	        script.Parent.ColorControl:WaitForChild('TextButton').MouseButton1Click:Connect(function()

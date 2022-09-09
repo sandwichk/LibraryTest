@@ -188,7 +188,7 @@ function Window:CreateWindow(title, pos)
 
         function Elements:CreateToggle(toggleName, bool, callback)
             toggleName = toggleName or "Toggle"
-            local tog = bool
+            bool = bool or false
             callback = callback or function() end
 
             local Toggle = Instance.new("Frame")
@@ -220,7 +220,7 @@ function Window:CreateWindow(title, pos)
 
             EnableDisable.Name = "Enable Disable"
             EnableDisable.Parent = Toggle
-            if tog==true then
+            if bool==true then
                 EnableDisable.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
             else
                 EnableDisable.BackgroundColor3 = Color3.fromRGB(18, 22, 25)
@@ -236,17 +236,17 @@ function Window:CreateWindow(title, pos)
             ToggleCorner.Parent = EnableDisable
             
             EnableDisable.MouseButton1Click:Connect(function()
-                if tog==false then
-                    tog=true
+                if bool==false then
+                    bool=true
                 elseif tog==true then
-
+                    bool=false
                 end
-                callback(tog)
-                if tog==true then
+                callback(bool)
+                if bool==true then
                     game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(255, 106, 0)
                     }):Play()
-                elseif tog==false then
+                elseif bool==false then
                     game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(18, 22, 25)
                     }):Play()

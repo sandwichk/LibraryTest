@@ -173,7 +173,7 @@ function Window:CreateWindow(title, pos)
             Button.Parent = NewPage
             Button.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
             Button.Position = UDim2.new(0.0238095243, 0, 0.126666665, 0)
-            Button.Size = UDim2.new(0, 350, 0, 35)
+            Button.Size = UDim2.new(0, 375, 0, 45)
             Button.Font = Enum.Font.Arial
             Button.Text = btnText
             Button.TextColor3 = Color3.fromRGB(223, 223, 223)
@@ -210,7 +210,7 @@ function Window:CreateWindow(title, pos)
 
             ColorPicker.Name = "ColorPicker"
             ColorPicker.Parent = NewPage
-            ColorPicker.BackgroundTransparency=1.000
+            ColorPicker.BackgroundTransparency=0
             ColorPicker.BackgroundColor3 = Color3.fromRGB(27, 29, 31)
             ColorPicker.Position = UDim2.new(0.380952388, 0, 0.236698121, 0)
             ColorPicker.Size = UDim2.new(0, 375, 0, 45)

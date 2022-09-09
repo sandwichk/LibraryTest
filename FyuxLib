@@ -13,6 +13,7 @@ function Window:CreateWindow(title)
     local SectionCorner = Instance.new("UICorner")
     local ElementsOrganization = Instance.new("UIListLayout")
     local Title = Instance.new("TextLabel")
+    local SectionsNames = Instance.new("TextLabel")
     
     if game.CoreGui:FindFirstChild("Fyuk Lib") then
         game.CoreGui:FindFirstChild("Fyuk Lib"):Destroy()
@@ -82,6 +83,18 @@ function Window:CreateWindow(title)
     SectionCorner.CornerRadius = UDim.new(0, 5)
     SectionCorner.Parent = Sections
 
+    SectionsNames.Parent = Sections
+    SectionsNames.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SectionsNames.BackgroundTransparency = 1.000
+    SectionsNames.Position = UDim2.new(0.029, 0,0, 0)
+    SectionsNames.Size = UDim2.new(0, 365,0, 28)
+    SectionsNames.Font = Enum.Font.Arial
+    SectionsNames.Text = "Section Name Here"
+    SectionsNames.TextColor3 = Color3.fromRGB(231, 231, 231)
+    SectionsNames.TextSize = 17.000
+    SectionsNames.TextWrapped = true
+    SectionsNames.Visible = false
+
     
     local TabsTable = {}
     
@@ -110,6 +123,8 @@ function Window:CreateWindow(title)
                 end
             end 
             NewPage.Visible = true
+            SectionsNames.Visible = true
+            SectionsNames.Text = tabname
 
             for i,v in next, Tabs:GetChildren() do
                 if v:IsA("TextButton") then

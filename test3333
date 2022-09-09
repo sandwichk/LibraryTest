@@ -173,7 +173,7 @@ function Window:CreateWindow(title, pos)
             Button.Parent = NewPage
             Button.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
             Button.Position = UDim2.new(0.0238095243, 0, 0.126666665, 0)
-            Button.Size = UDim2.new(0, 375, 0, 45)
+            Button.Size = UDim2.new(0, 375, 0, 35)
             Button.Font = Enum.Font.Arial
             Button.Text = btnText
             Button.TextColor3 = Color3.fromRGB(223, 223, 223)
@@ -184,6 +184,67 @@ function Window:CreateWindow(title, pos)
  
             buttonCorner.CornerRadius = UDim.new(0, 5)
             buttonCorner.Parent = Button
+        end
+
+        function Elements:CreateToggle(toggleName, callback)
+            toggleName = toggleName or "Toggle"
+            callback = callback or function() end
+
+            local Toggle = Instance.new("Frame")
+            local ToggleCorner2 = Instance.new("UICorner")
+            local Name = Instance.new("TextLabel")
+            local EnableDisable = Instance.new("TextButton")
+            local ToggleCorner = Instance.new("UICorner")
+
+            Toggle.Name = "Toggle"
+            Toggle.Parent = NewPage
+            Toggle.BackgroundColor3 = Color3.fromRGB(27, 29, 31)
+            Toggle.Position = UDim2.new(0.380952388, 0, 0.236698121, 0)
+            Toggle.Size = UDim2.new(0, 375, 0, 45)
+
+            ToggleCorner2.CornerRadius = UDim.new(0, 5)
+            ToggleCorner2.Parent = Toggle
+
+            Name.Name = "Name"
+            Name.Parent = Toggle
+            Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Name.BackgroundTransparency = 1.000
+            Name.Position = UDim2.new(0.0266666673, 0, 0, 0)
+            Name.Size = UDim2.new(0, 260, 0, 45)
+            Name.Font = Enum.Font.Arial
+            Name.Text = "Toggle"
+            Name.TextColor3 = Color3.fromRGB(231, 231, 231)
+            Name.TextSize = 16.000
+            Name.TextXAlignment = Enum.TextXAlignment.Left
+
+            EnableDisable.Name = "Enable Disable"
+            EnableDisable.Parent = Toggle
+            EnableDisable.BackgroundColor3 = Color3.fromRGB(18, 22, 25)
+            EnableDisable.Position = UDim2.new(0.879666686, 0, 0.151222065, 0)
+            EnableDisable.Size = UDim2.new(0, 35, 0, 32)
+            EnableDisable.Font = Enum.Font.SourceSans
+            EnableDisable.Text = " "
+            EnableDisable.TextColor3 = Color3.fromRGB(0, 0, 0)
+            EnableDisable.TextSize = 14.000
+
+            ToggleCorner.CornerRadius = UDim.new(0, 4)
+            ToggleCorner.Parent = EnableDisable
+
+            local tog = false
+            
+            EnableDisable.MouseButton1Click:Connect(function()
+                tog = not tog
+                callback(tog)
+                if tog then 
+                    game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+                    }):Play()
+                else
+                    game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        BackgroundColor3 = Color3.fromRGB(18, 22, 25)
+                    }):Play()
+                end
+            end)
         end
 
         function Elements:CreateColorPicker(colorText, default, callback)

@@ -1,0 +1,456 @@
+local Window = {}
+ 
+function Window:CreateWindow(title, pos)
+    title = title or 'Fyuk Lib... No Title'
+    pos = pos or UDim2.new(0,0,0)
+
+    local UIGui = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local SideBar = Instance.new("Frame")
+    local SideBarCorner = Instance.new("UICorner")
+    local Tabs = Instance.new("Frame")
+    local TabsOrganization = Instance.new("UIListLayout")
+    local MainCorner = Instance.new("UICorner")
+    local Sections = Instance.new("Frame")
+    local SectionCorner = Instance.new("UICorner")
+    local ElementsOrganization = Instance.new("UIListLayout")
+    local Title = Instance.new("TextLabel")
+    local PageName = Instance.new("TextLabel")
+    
+    if game.CoreGui:FindFirstChild("Fyuk Lib") then
+        game.CoreGui:FindFirstChild("Fyuk Lib"):Destroy()
+    end
+
+    UIGui.Name = 'Fyuk Lib'
+    UIGui.Parent = game.CoreGui
+    UIGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    UIGui.ResetOnSpawn = false
+
+    Main.Name = "Main"
+    Main.Parent = UIGui
+    Main.BackgroundColor3 = Color3.fromRGB(24, 27, 31)
+    Main.Position = pos
+    Main.Size = UDim2.new(0, 600, 0, 350)
+    Main.Active = true
+    Main.Draggable = true
+    Main.Visible = true
+
+    MainCorner.CornerRadius = UDim.new(0, 5)
+    MainCorner.Parent = Main
+
+    Title.Name = "Title"
+    Title.Parent = Main
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0.0266666673, 0, 0, 0)
+    Title.Size = UDim2.new(0, 584, 0, 40)
+    Title.Font = Enum.Font.ArialBold
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.TextSize = 24.000
+    Title.TextWrapped = true
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Text = tostring(title)
+    Title.Visible = true
+
+    SideBar.Name = "SideBar"
+    SideBar.Parent = Main
+    SideBar.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+    SideBar.Position = UDim2.new(0.0166666675, 0, 0.114285715, 0)
+    SideBar.Size = UDim2.new(0, 150, 0, 300)
+    SideBar.Visible = true
+
+    SideBarCorner.CornerRadius = UDim.new(0, 5)
+    SideBarCorner.Parent = SideBar
+
+    Tabs.Name = "Tabs"
+    Tabs.Parent = SideBar
+    Tabs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Tabs.BackgroundTransparency = 1.000
+    Tabs.Position = UDim2.new(0.0399999991, 0, 0.0199999996, 0)
+    Tabs.Size = UDim2.new(0, 138, 0, 288)
+    Tabs.Visible = true
+ 
+    TabsOrganization.Name = "TabsOrganization"
+    TabsOrganization.Parent = Tabs
+    TabsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
+    TabsOrganization.Padding = UDim.new(0, 4)
+ 
+    Sections.Name = "Sections"
+    Sections.Parent = Main
+    Sections.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+    Sections.Position = UDim2.new(0.283333331, 0, 0.114285715, 0)
+    Sections.Size = UDim2.new(0, 420, 0, 300)
+    Sections.Visible = true
+    
+    SectionCorner.CornerRadius = UDim.new(0, 5)
+    SectionCorner.Parent = Sections
+
+    PageName.Parent = Sections
+    PageName.Name = "PageName"
+    PageName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    PageName.BackgroundTransparency = 1.000
+    PageName.Position = UDim2.new(0.029, 0,0, 0)
+    PageName.Size = UDim2.new(0, 365,0, 28)
+    PageName.Font = Enum.Font.ArialBold
+    PageName.Text = "NewTab"
+    PageName.TextColor3 = Color3.fromRGB(255, 255, 255)
+    PageName.TextSize = 18.000
+    PageName.TextXAlignment = Enum.TextXAlignment.Left
+    PageName.Visible = false
+    
+    local TabsTable = {}
+    
+    function TabsTable:CreateTab(tabname)
+
+        tabname = tabname or "New Tab"
+        local TabButton = Instance.new("TextButton")
+        local TabCorner = Instance.new("UICorner")
+        local NewPage = Instance.new("ScrollingFrame") 
+        local ElementsOrganization = Instance.new("UIListLayout") 
+        
+        TabButton.Name = "TabButton"
+        TabButton.Parent = Tabs
+        TabButton.BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+        TabButton.Size = UDim2.new(0, 138, 0, 25)
+        TabButton.Font = Enum.Font.Arial
+        TabButton.Text = tabname
+        TabButton.TextColor3 = Color3.fromRGB(244, 244, 244)
+        TabButton.TextSize = 18.000
+        TabButton.Visible = true
+        
+        TabButton.MouseButton1Click:Connect(function()
+            for i,v in next, Sections:GetChildren() do
+                if v:IsA('ScrollingFrame') then
+                    v.Visible = false
+                end
+            end 
+            NewPage.Visible = true
+            PageName.Visible = true
+            PageName.Text = tabname
+
+            for i,v in next, Tabs:GetChildren() do
+                if v:IsA("TextButton") then
+                    game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        BackgroundColor3 = Color3.fromRGB(20, 22, 25)
+                    }):Play()
+                end
+            end
+
+            game.TweenService:Create(TabButton, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+            }):Play()
+        end)
+ 
+        TabCorner.CornerRadius = UDim.new(0, 4)
+        TabCorner.Parent = TabButton
+        
+        NewPage.Name = "NewPage"
+        NewPage.Parent = Sections
+        NewPage.Active = true
+        NewPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NewPage.BackgroundTransparency = 1.000
+        NewPage.Size = UDim2.new(0, 420,0, 265)
+        NewPage.Position = UDim2.new(0, 0,0.117, 0)
+        NewPage.Visible = false
+        NewPage.ScrollBarThickness = 5
+ 
+        ElementsOrganization.Name = "ElementsOrganization"
+        ElementsOrganization.Parent = NewPage
+        ElementsOrganization.SortOrder = Enum.SortOrder.LayoutOrder
+        ElementsOrganization.Padding = UDim.new(0, 6)
+        ElementsOrganization.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+        local Elements = {}
+        
+        function Elements:CreateButton(btnText, callback)
+            btnText = btnText or "Text Button"
+            callback = callback or function() end   
+            
+            local Button = Instance.new("TextButton")
+            local buttonCorner = Instance.new("UICorner")
+            
+            Button.Name = "Button"
+            Button.Parent = NewPage
+            Button.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+            Button.Position = UDim2.new(0.0238095243, 0, 0.126666665, 0)
+            Button.Size = UDim2.new(0, 350, 0, 35)
+            Button.Font = Enum.Font.Arial
+            Button.Text = btnText
+            Button.TextColor3 = Color3.fromRGB(223, 223, 223)
+            Button.TextSize = 16.000
+            Button.MouseButton1Click:Connect(function()
+                callback()
+            end)
+ 
+            buttonCorner.CornerRadius = UDim.new(0, 5)
+            buttonCorner.Parent = Button
+        end
+
+        function Elements:CreateColorPicker(colorText, default, callback)
+            colorText = colorText or 'ColorPicker'
+
+            local ColorPicker = Instance.new("Frame")
+            local UICorner = Instance.new("UICorner")
+            local Name = Instance.new("TextLabel")
+            local ColourDisplay = Instance.new("TextButton")
+            local UICorner_2 = Instance.new("UICorner")
+            local ColorControl = Instance.new("Frame")
+            local UICorner_3 = Instance.new("UICorner")
+            local DarknessPicker = Instance.new("ImageButton")
+            local UIGradient = Instance.new("UIGradient")
+            local Slider = Instance.new("ImageLabel")
+            local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+            local ColourWheel = Instance.new("ImageButton")
+            local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+            local Picker = Instance.new("ImageLabel")
+            local ColorPreVisualizer = Instance.new("Frame")
+            local UICorner_4 = Instance.new("UICorner")
+            local TextButton = Instance.new("TextButton")
+            local UICorner_5 = Instance.new("UICorner")
+
+            ColorPicker.Name = "ColorPicker"
+            ColorPicker.Parent = NewPage
+            ColorPicker.BackgroundTransparency=1.000
+            ColorPicker.BackgroundColor3 = Color3.fromRGB(27, 29, 31)
+            ColorPicker.Position = UDim2.new(0.380952388, 0, 0.236698121, 0)
+            ColorPicker.Size = UDim2.new(0, 375, 0, 45)
+
+            UICorner.CornerRadius = UDim.new(0, 5)
+            UICorner.Parent = ColorPicker
+
+            Name.Name = "Name"
+            Name.Parent = ColorPicker
+            Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Name.BackgroundTransparency = 1.000
+            Name.Position = UDim2.new(0.0266666673, 0, 0, 0)
+            Name.Size = UDim2.new(0, 260, 0, 45)
+            Name.Font = Enum.Font.Arial
+            Name.Text = colorText
+            Name.TextColor3 = Color3.fromRGB(231, 231, 231)
+            Name.TextSize = 16.000
+            Name.TextXAlignment = Enum.TextXAlignment.Left
+
+            ColourDisplay.Name = "ColourDisplay"
+            ColourDisplay.Parent = ColorPicker
+            ColourDisplay.BackgroundColor3 = default
+            ColourDisplay.Position = UDim2.new(0.773000002, 0, 0.128999993, 0)
+            ColourDisplay.Size = UDim2.new(0, 75, 0, 32)
+            ColourDisplay.Font = Enum.Font.SourceSans
+            ColourDisplay.Text = " "
+            ColourDisplay.TextColor3 = Color3.fromRGB(0, 0, 0)
+            ColourDisplay.TextSize = 14.000
+
+            UICorner_2.CornerRadius = UDim.new(0, 4)
+            UICorner_2.Parent = ColourDisplay
+
+            ColorControl.Name = "ColorControl"
+            ColorControl.Parent = ColorPicker
+            ColorControl.BackgroundColor3 = Color3.fromRGB(27, 29, 31)
+            ColorControl.Position = UDim2.new(0.0986666679, 0, -0.355555564, 0)
+            ColorControl.Size = UDim2.new(0, 300, 0, 150)
+            ColorControl.Visible = false
+
+            UICorner_3.CornerRadius = UDim.new(0, 5)
+            UICorner_3.Parent = ColorControl
+
+            DarknessPicker.Name = "DarknessPicker"
+            DarknessPicker.Parent = ColorControl
+            DarknessPicker.Active = false
+            DarknessPicker.AnchorPoint = Vector2.new(0.5, 0.5)
+            DarknessPicker.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DarknessPicker.BackgroundTransparency = 1.000
+            DarknessPicker.BorderSizePixel = 0
+            DarknessPicker.Position = UDim2.new(0.499338359, 0, 0.392862558, 0)
+            DarknessPicker.Selectable = false
+            DarknessPicker.Size = UDim2.new(0.0466439128, 0, 0.618993759, 0)
+            DarknessPicker.ZIndex = 2
+            DarknessPicker.Image = "rbxassetid://3570695787"
+            DarknessPicker.ScaleType = Enum.ScaleType.Slice
+            DarknessPicker.SliceCenter = Rect.new(100, 100, 100, 100)
+            DarknessPicker.SliceScale = 0.120
+
+            UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
+            UIGradient.Rotation = 90
+            UIGradient.Parent = DarknessPicker
+
+            Slider.Name = "Slider"
+            Slider.Parent = DarknessPicker
+            Slider.AnchorPoint = Vector2.new(0.5, 0.5)
+            Slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Slider.BackgroundTransparency = 1.000
+            Slider.BorderSizePixel = 0
+            Slider.Position = UDim2.new(0.491197795, 0, 0.0733607039, 0)
+            Slider.Size = UDim2.new(1.28656352, 0, 0.0265010502, 0)
+            Slider.ZIndex = 2
+            Slider.Image = "rbxassetid://3570695787"
+            Slider.ImageColor3 = Color3.fromRGB(0, 123, 255)
+            Slider.ScaleType = Enum.ScaleType.Slice
+            Slider.SliceCenter = Rect.new(100, 100, 100, 100)
+            Slider.SliceScale = 0.120
+
+            UIAspectRatioConstraint.Parent = DarknessPicker
+            UIAspectRatioConstraint.AspectRatio = 0.157
+
+            ColourWheel.Name = "ColourWheel"
+            ColourWheel.Parent = ColorControl
+            ColourWheel.Active = false
+            ColourWheel.AnchorPoint = Vector2.new(0.5, 0.5)
+            ColourWheel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ColourWheel.BackgroundTransparency = 1.000
+            ColourWheel.BorderSizePixel = 0
+            ColourWheel.Position = UDim2.new(0.233782545, 0, 0.417891085, 0)
+            ColourWheel.Selectable = false
+            ColourWheel.Size = UDim2.new(0.317801178, 0, 0.710885167, 0)
+            ColourWheel.Image = "http://www.roblox.com/asset/?id=6020299385"
+
+            UIAspectRatioConstraint_2.Parent = ColourWheel
+            UIAspectRatioConstraint_2.AspectRatio = 1.000
+
+            Picker.Name = "Picker"
+            Picker.Parent = ColourWheel
+            Picker.AnchorPoint = Vector2.new(0.5, 0.5)
+            Picker.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Picker.BackgroundTransparency = 1.000
+            Picker.BorderSizePixel = 0
+            Picker.Position = UDim2.new(0.499999881, 0, 0.494755477, 0)
+            Picker.Size = UDim2.new(0.111003153, 0, 0.121492088, 0)
+            Picker.Image = "http://www.roblox.com/asset/?id=3678860011"
+            Picker.ImageColor3 = Color3.fromRGB(0, 123, 255)
+
+            ColorPreVisualizer.Name = "ColorPreVisualizer"
+            ColorPreVisualizer.Parent = ColorControl
+            ColorPreVisualizer.BackgroundColor3 = default
+            ColorPreVisualizer.Position = UDim2.new(0.646666646, 0, 0.0953881815, 0)
+            ColorPreVisualizer.Size = UDim2.new(0, 84, 0, 94)
+
+            UICorner_4.CornerRadius = UDim.new(0, 4)
+            UICorner_4.Parent = ColorPreVisualizer
+
+            TextButton.Parent = ColorControl
+            TextButton.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+            TextButton.Position = UDim2.new(0.163333327, 0, 0.826666653, 0)
+            TextButton.Size = UDim2.new(0, 200, 0, 20)
+            TextButton.Font = Enum.Font.Arial
+            TextButton.Text = "Select"
+            TextButton.TextColor3 = Color3.fromRGB(231, 231, 231)
+            TextButton.TextSize = 16.000
+
+            UICorner_5.CornerRadius = UDim.new(0, 5)
+            UICorner_5.Parent = TextButton
+
+
+            local function PEAEU_fake_script()
+                local script = Instance.new('LocalScript', ColorPicker)
+
+                local colourWheel = script.Parent.ColorControl:WaitForChild("ColourWheel")
+                local wheelPicker = colourWheel:WaitForChild("Picker")
+                
+                local darknessPicker = script.Parent.ColorControl:WaitForChild("DarknessPicker")
+                local darknessSlider = darknessPicker:WaitForChild("Slider")
+                
+                local colourDisplay = script.Parent:WaitForChild("ColourDisplay")
+                local colourPreVisualizer = script.Parent.ColorControl:WaitForChild('ColorPreVisualizer')
+                
+                
+                local uis = game:GetService("UserInputService")
+                
+                
+                local buttonDown = false
+                local movingSlider = false
+                
+                
+                local function updateColour(centreOfWheel)
+                        local colourPickerCentre = Vector2.new(
+                            colourWheel.Picker.AbsolutePosition.X + (colourWheel.Picker.AbsoluteSize.X/2),
+                            colourWheel.Picker.AbsolutePosition.Y + (colourWheel.Picker.AbsoluteSize.Y/2)
+                        )
+                        local h = (math.pi - math.atan2(colourPickerCentre.Y - centreOfWheel.Y, colourPickerCentre.X - centreOfWheel.X)) / (math.pi * 2)
+                        local s = (centreOfWheel - colourPickerCentre).Magnitude / (colourWheel.AbsoluteSize.X/2)
+                        local v = math.abs((darknessSlider.AbsolutePosition.Y - darknessPicker.AbsolutePosition.Y) / darknessPicker.AbsoluteSize.Y - 1)
+                        _G.hsv = Color3.fromHSV(math.clamp(h, 0, 1), math.clamp(s, 0, 1), math.clamp(v, 0, 1))
+                        colourPreVisualizer.BackgroundColor3 = _G.hsv
+                        darknessPicker.UIGradient.Color = ColorSequence.new{
+                            ColorSequenceKeypoint.new(0, _G.hsv), 
+                            ColorSequenceKeypoint.new(1, Color3.new(0, 0, 0))
+                        }
+                        end
+                        colourWheel.MouseButton1Down:Connect(function()
+                            buttonDown = true
+                        end)
+                        darknessPicker.MouseButton1Down:Connect(function()
+                            movingSlider = true
+                        end)
+                        uis.InputEnded:Connect(function(input)
+                            
+                            if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+                            
+                            buttonDown = false
+                            movingSlider = false
+                        end)
+                        uis.InputChanged:Connect(function(input)
+                            if input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
+                            local mousePos = uis:GetMouseLocation() - Vector2.new(0, game:GetService("GuiService"):GetGuiInset().Y)
+                            local centreOfWheel = Vector2.new(colourWheel.AbsolutePosition.X + (colourWheel.AbsoluteSize.X/2), colourWheel.AbsolutePosition.Y + (colourWheel.AbsoluteSize.Y/2))
+                            local distanceFromWheel = (mousePos - centreOfWheel).Magnitude
+                            if distanceFromWheel <= colourWheel.AbsoluteSize.X/2 and buttonDown then
+                                wheelPicker.Position = UDim2.new(0, mousePos.X - colourWheel.AbsolutePosition.X, 0, mousePos.Y - colourWheel.AbsolutePosition.Y)
+                            elseif movingSlider then
+                                darknessSlider.Position = UDim2.new(darknessSlider.Position.X.Scale, 0, 0, 
+                                    math.clamp(
+                                    mousePos.Y - darknessPicker.AbsolutePosition.Y, 
+                                    0, 
+                                    darknessPicker.AbsoluteSize.Y)
+                                )	
+                            end
+                                updateColour(centreOfWheel)
+                    end)
+	
+	        script.Parent.ColorControl:WaitForChild('TextButton').MouseButton1Click:Connect(function()
+		            colourDisplay.BackgroundColor3 = _G.hsv
+		            colourDisplay.Parent.ColorControl.Visible=false
+                    callback(_G.hsv)
+                end)
+            end
+            coroutine.wrap(PEAEU_fake_script)()
+
+            local function OSMZ_fake_script()
+                local script = Instance.new('LocalScript', ColourDisplay)
+
+                local button = script.Parent
+                local control = button.Parent:FindFirstChild('ColorControl')
+                
+                button.MouseButton1Click:Connect(function()
+                    if control.Visible==false then
+                        control.Visible=true
+                    elseif control.Visible==true then
+                        control.Visible=false
+                    end
+                end)
+            end
+            coroutine.wrap(OSMZ_fake_script)()
+        end
+
+        function Elements:CreateTextLabel(content)
+            local content = content or 'Write anything'
+            local TextLabel = Instance.new('TextLabel')
+
+            TextLabel.Parent = NewPage
+            TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextLabel.BackgroundTransparency = 1.000
+            TextLabel.Position = UDim2.new(0.0535714291, 0, 0.154716983, 0)
+            TextLabel.Size = UDim2.new(0, 390, 0, 25)
+            TextLabel.Font = Enum.Font.Arial
+            TextLabel.Text = content
+            TextLabel.TextColor3 = Color3.fromRGB(231, 231, 231)
+            TextLabel.TextSize = 17.000
+            TextLabel.TextWrapped = true
+        end
+
+        return Elements
+        
+    end
+    
+    return TabsTable
+end
+ 
+return Window

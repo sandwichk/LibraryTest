@@ -186,8 +186,9 @@ function Window:CreateWindow(title, pos)
             buttonCorner.Parent = Button
         end
 
-        function Elements:CreateToggle(toggleName, callback)
+        function Elements:CreateToggle(toggleName, bool, callback)
             toggleName = toggleName or "Toggle"
+            local tog = bool
             callback = callback or function() end
 
             local Toggle = Instance.new("Frame")
@@ -219,7 +220,11 @@ function Window:CreateWindow(title, pos)
 
             EnableDisable.Name = "Enable Disable"
             EnableDisable.Parent = Toggle
-            EnableDisable.BackgroundColor3 = Color3.fromRGB(18, 22, 25)
+            if tog==true then
+                EnableDisable.BackgroundColor3 = Color3.fromRGB(255, 106, 0)
+            else
+                EnableDisable.BackgroundColor3 = Color3.fromRGB(18, 22, 25)
+            end
             EnableDisable.Position = UDim2.new(0.879666686, 0, 0.151222065, 0)
             EnableDisable.Size = UDim2.new(0, 35, 0, 32)
             EnableDisable.Font = Enum.Font.SourceSans
@@ -229,17 +234,19 @@ function Window:CreateWindow(title, pos)
 
             ToggleCorner.CornerRadius = UDim.new(0, 4)
             ToggleCorner.Parent = EnableDisable
-
-            local tog = false
             
             EnableDisable.MouseButton1Click:Connect(function()
-                tog = not tog
+                if tog==false then
+                    tog=true
+                elseif tog==true then
+
+                end
                 callback(tog)
-                if tog then 
+                if tog==true then
                     game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(255, 106, 0)
                     }):Play()
-                else
+                elseif tog==false then
                     game.TweenService:Create(EnableDisable, TweenInfo.new(0.20, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                         BackgroundColor3 = Color3.fromRGB(18, 22, 25)
                     }):Play()

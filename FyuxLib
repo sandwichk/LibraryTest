@@ -94,7 +94,7 @@ function Window:CreateWindow(title)
     PageName.TextColor3 = Color3.fromRGB(255, 255, 255)
     PageName.TextSize = 18.000
     PageName.TextXAlignment = Enum.TextXAlignment.Left
-
+    PageName.Visible = false
     
     local TabsTable = {}
     
@@ -185,6 +185,7 @@ function Window:CreateWindow(title)
         end
 
         function Elements:CreateColorPicker(colorText, default, callback)
+            colorText = colorText or 'ColorPicker'
 
             local ColorPicker = Instance.new("Frame")
             local UICorner = Instance.new("UICorner")
@@ -221,7 +222,7 @@ function Window:CreateWindow(title)
             Name.Position = UDim2.new(0.0266666673, 0, 0, 0)
             Name.Size = UDim2.new(0, 260, 0, 45)
             Name.Font = Enum.Font.Arial
-            Name.Text = "ColorPicekr"
+            Name.Text = colorText
             Name.TextColor3 = Color3.fromRGB(231, 231, 231)
             Name.TextSize = 16.000
             Name.TextXAlignment = Enum.TextXAlignment.Left
@@ -427,7 +428,7 @@ function Window:CreateWindow(title)
         end
 
         function Elements:CreateTextLabel(content)
-            local content = content or 'Write anything bbruhhh'
+            local content = content or 'Write anything'
             local TextLabel = Instance.new('TextLabel')
 
             TextLabel.Parent = NewPage
